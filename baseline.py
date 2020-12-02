@@ -34,7 +34,8 @@ def base_experiment():
     model.add(Flatten())
     model.add(Dense(units=128, activation="relu"))
     model.add(Dropout(rate=0.25))
-    model.add(Dense(NUM_CLASSES, activation="softmax"))
+    model.add(Dense(NUM_CLASSES, activation="softmax"
+    ))
 
     model.compile(
         optimizer=keras.optimizers.Adam(1e-3),

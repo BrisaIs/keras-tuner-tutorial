@@ -14,14 +14,14 @@ from utils import (
     load_data,
 )
 
-SEED = 1
+SEED = 4
 
-NUM_CLASSES = 10
-INPUT_SHAPE = (32, 32, 3)
+NUM_CLASSES = 5
+INPUT_SHAPE = (350, 350, 3)
 
-N_EPOCH_SEARCH = 40
-HYPERBAND_MAX_EPOCHS = 40
-MAX_TRIALS = 20
+N_EPOCH_SEARCH = 500
+HYPERBAND_MAX_EPOCHS = 500
+MAX_TRIALS = 1
 EXECUTION_PER_TRIAL = 2
 BAYESIAN_NUM_INITIAL_POINTS = 1
 
@@ -31,7 +31,7 @@ def run_hyperparameter_tuning():
 
     hypermodel = CNNHyperModel(input_shape=INPUT_SHAPE, num_classes=NUM_CLASSES)
 
-    output_dir = Path("./output/cifar10/")
+    output_dir = Path("/scratch/201903073c-1/tuner_outputs/")
     tuners = define_tuners(
         hypermodel, directory=output_dir, project_name="simple_cnn_tuning"
     )
