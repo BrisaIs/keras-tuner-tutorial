@@ -44,6 +44,20 @@ def configure_for_performance(ds):
   return ds
 
 def load_data():
+    training_data_dir = "/scratch/201903073c-1/nudity/training"
+    training_data_dir = pathlib.Path(training_data_dir)
+    training_image_count = len(list(data_dir.glob('*/*.jpg')))
+
+    testing_data_dir = "/scratch/201903073c-1/nudity/testing"
+    testing_data_dir = pathlib.Path(testing_data_dir)
+    testing_image_count = len(list(data_dir.glob('*/*.jpg')))
+
+    training_list_ds = tf.data.Dataset.list_files(str(training_data_dir/'*/*'), shuffle=False)
+    training_list_ds = list_ds.shuffle(training_image_count, reshuffle_each_iteration=False)
+
+    testing_list_ds = tf.data.Dataset.list_files(str(testing_data_dir/'*/*'), shuffle=False)
+    testing_list_ds = list_ds.shuffle(testing_image_count, reshuffle_each_iteration=False)
+
     train_ds = train_ds.map(process_path, num_parallel_calls=AUTOTUNE)
     val_ds = val_ds.map(process_path, num_parallel_calls=AUTOTUNE)
 
